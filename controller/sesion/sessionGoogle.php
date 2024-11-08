@@ -40,38 +40,41 @@ if (isset($_GET['email']) && isset($_GET['accessToken']) && isset($_GET['display
 
         session_start(); // Inicia la sesión al comienzo del archivo
         $_SESSION['nombre'] = $displayName;
-        $_SESSION['idt'] = 2;
+        $_SESSION['idt'] = $userData['IDT'];
         $_SESSION['id'] = $userData['ID'];
  
         // echo "Hola de nuevo ";
 
-
+        header("Location: http://localhost/herbopedia/view/user.php");
 
 
 
     } else {
-
-
-        echo"Nuevo usuario";    echo "<br/>";
+        echo "Nuevo usuario";    
+        echo "<br/>";
+        
         // Si el usuario no existe, inserta un nuevo registro
-        $insertQuery = "INSERT INTO usuario (Nombres, Apellido, Correo, IDT,accessToken_google) VALUES (:firstName, :lastName, :email, :IDT,:accessToken)";
-
-
+        $insertQuery = "INSERT INTO usuario (Nombres, Apellido, Correo, IDT, accessToken_google) VALUES (:firstName, :lastName, :email, :IDT, :accessToken)";
         $insertStmt = $conn->prepare($insertQuery);
         $insertStmt->bindValue(':firstName', $displayName);
         $insertStmt->bindValue(':lastName', $displayName);
         $insertStmt->bindValue(':email', $email);
         $insertStmt->bindValue(':IDT', 2);
         $insertStmt->bindValue(':accessToken', $accessToken);
-
         $insertStmt->execute();
-
-
-
-        session_start(); // Inicia la sesión al comienzo del archivo
+        
+        // Recupera el último ID insertado
+        $lastInsertId = $conn->lastInsertId();
+        
+        // Inicia la sesión y asigna los datos a las variables de sesión
+        session_start();
         $_SESSION['nombre'] = $displayName;
-
-        echo "Nuevo usuario creado";
+        $_SESSION['idt'] = 2;
+        $_SESSION['id'] = $lastInsertId;
+        
+        // Redirige al usuario a la página deseada
+        header("Location: http://localhost/herbopedia/view/user.php");
+        exit();        
     }
 
     // Crea la sesión con el nombre del usuario

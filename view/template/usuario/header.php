@@ -26,13 +26,10 @@ require_once("../bd/validate.php");
   <link rel="stylesheet" href="../css/swiper-bundle.min.css" />
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/styles-datos.css">
-  <!--
 
-TemplateMo 586 Scholar
 
-https://templatemo.com/tm-586-scholar
-
--->
+  <!-- Api de Paypal -->
+  <script src="https://www.paypal.com/sdk/js?client-id=tu-cliente-idcurrency=MXN"></script>
 </head>
 
 <body>
@@ -66,13 +63,13 @@ https://templatemo.com/tm-586-scholar
             <!-- ***** Menu Start ***** -->
             <ul class="nav">
               <?php if ($_SESSION['idt']==1) echo '
-              <li class="scroll-to-section"><a href="../view/admin.php"><strong>Dashboard</strong></a></li>';?>
+              <li class="scroll-to-section"><a href="../view/face_login.php"><strong>Dashboard</strong></a></li>';?>
               <li class="scroll-to-section"><a href="../view/user.php?m=use_P">Plantas</a></li>
               <li class="scroll-to-section"><a href="../view/user.php?m=use_D">Descubridores</a></li>
               <?php if ($_SESSION['idt']==2) echo '
               <li class="scroll-to-section"><a data-bs-toggle="modal" data-bs-target="#premium_modal"><i class="fa-regular fa-gem"></i>  Recetas</a></li>';
               else echo'<li class="scroll-to-section"><a href="../view/user.php?m=use_R">Recetas</a></li>';?>
-              <li class="scroll-to-section"><a href="../bd/logout.php">Cerrar Sesion</a></li>
+              <li class="scroll-to-section"><a href="../bd/logout.php?session=google">Cerrar Sesion</a></li>
             </ul>
             <a class="menu-trigger">
               <span>Menu</span>
@@ -134,3 +131,4 @@ https://templatemo.com/tm-586-scholar
       margin-left: 8px; /* Aqui puedo ajustar el espacio a la derecha del texto según sea necesario */
     }
   </style>
+

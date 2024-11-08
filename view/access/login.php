@@ -27,9 +27,9 @@
                         </form>
                     </div>
                     <div>
-                        <button id="iniciarGoogle">Iniciar con google</button>
-                        <button id="cerrarSesion">Cerrar sesión</button>
-                        <div id="status">Verificando sesión...</div>
+                        <span class="informativo-span">O inicia sesión con Google</span>
+                        <button id="iniciarGoogle"> <img src="http://localhost/herbopedia/img/icon/google_icon.png"> Iniciar con google</button>
+                        
                     </div>
                     <div class="card-footer text-center py-3">
                         <div class="small"><a href="access.php?m=register">¿no tienes cuenta? ¡Registrate!</a></div>
@@ -172,10 +172,58 @@
             document.getElementById("status").textContent = `Bienvenido, ${user.displayName}`;
         } else {
             // Si el usuario no está autenticado
-            console.log("No hay sesión iniciada.");
-            document.getElementById("status").textContent = "No hay sesión iniciada";
+            
+            
+
+            
         }
     });
 
+    // Función para comprobar si un parámetro existe en la URL
+    function checkGetParameter(param) {
+        // Crea un objeto URLSearchParams a partir de la cadena de consulta de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Comprueba si el parámetro está presente
+        return urlParams.has(param);
+    }
+
+    // Ejemplo de uso
+    if (checkGetParameter('session')) {
+        console.log('El parámetro "session" existe en la URL');
+        cerrarSesion(); 
+    } else {
+        console.log('El parámetro "session" no está presente en la URL');
+    }
+
 
 </script>
+
+<style>
+    #iniciarGoogle{
+        background-color: #4081ec;
+        color: white;
+        border: 1px solid #fff3ff;
+        font-family: Helvetica;
+        padding: 21px;
+        width: 93%;
+        display: flex;
+        margin: 0 auto;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        border-radius: 15px;
+        gap: 12px;
+        align-items: center;
+
+    }
+    #iniciarGoogle img{
+        width: 30px;
+        height: 30px;
+        border-radius: 21px;
+    }
+
+    .informativo-span{
+        padding: 21px;
+    }
+</style>

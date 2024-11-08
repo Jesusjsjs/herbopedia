@@ -11,30 +11,38 @@
                                     descargar los artículos en formato <strong>pdf</strong>.
                                     </div>
 
-
-                                    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
-                                        <!-- Identificador del comerciante (tu correo de PayPal o ID) -->
-                                        <input type="hidden" name="business" value="jesusjsmontejo@gmail.com">
-
-                                        <!-- Tipo de acción (para enviar un pago) -->
-                                        <input type="hidden" name="cmd" value="_xclick">
-
-                                        <!-- Detalles del producto -->
-                                        <input type="hidden" name="item_name" value="Producto de Ejemplo">
-                                        <input type="hidden" name="amount" value="9.00"> <!-- Precio del producto -->
-
-                                        <!-- Moneda -->
-                                        <input type="hidden" name="currency_code" value="USD">
-
-                                        <!-- Dirección de retorno después del pago (opcional) -->
-                                        <input type="hidden" name="return" value="http://localhost/herbopedia/view/user.php">
-                                        <!-- Dirección de cancelación (opcional) -->
-                                        <input type="hidden" name="cancel_return" value="http://localhost/herbopedia/view/user.php">
-
-                                        <!-- Botón de pago de PayPal -->
-                                        <input type="submit" value="Pagar con PayPal">
-                                    </form>
+                                    <div id="paypal-button-container"></div>
                                     
                                 </div>
+
                         </div>
                     </div>
+
+
+                    <script src="https://www.paypal.com/sdk/js?client-id=AV1n87EqPAVI6cN27cw8F2pZ1Eujm4XhBAzsATomw7EBLcSGtzNTaqlnedrEhq4v9qQpXLUedGyEQzy8&currency=USD"></script>
+
+                    <script>
+                        // Renderizar el botón de PayPal
+                        paypal.Buttons({
+                            // Configura la transacción
+                            createOrder: function(data, actions) {
+                                return actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                            value: '6.00' // Monto a pagar
+                                        }
+                                    }]
+                                });
+                            },
+                            // Captura el pago cuando el usuario confirme
+                            onApprove: function(data, actions) {
+                                return actions.order.capture().then(function(details) {
+                                    alert('Transacción completada por ' + details.payer.name.given_name);
+                                    console.log(details);
+                                });
+                            },
+                            onError: function(err) {
+                                console.error('Error en el pago:', err);
+                            }
+                        }).render('#paypal-button-container'); // Renderiza el botón en el contenedor
+                    </script>
