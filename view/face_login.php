@@ -15,9 +15,6 @@
 
     </div>
 
-    <div>
-        <h3>Verificando información</h3>
-    </div>
 </body>
 </html>
 
