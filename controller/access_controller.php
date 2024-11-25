@@ -33,8 +33,8 @@
             include_once('../view/access/footer_access.php');
 
         }
-
         function pago(){
+
 
             include_once('../view/access/header_access.php');
             include_once('../view/access/pago.php');

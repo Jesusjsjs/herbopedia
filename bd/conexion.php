@@ -9,6 +9,7 @@ class Database
     private static $cont  = null;
      
 
+    private static $contTwo = null;
     
     public function __construct() {
         die('Init function is not allowed');

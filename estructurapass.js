@@ -4,7 +4,7 @@ function getRequest(url) {
   return new Promise((resolve, reject) => {
     https.get(url, (response) => {
       let data = '';
- 
+
       // Recibir los datos por partes
       response.on('data', (chunk) => {
         data += chunk;
